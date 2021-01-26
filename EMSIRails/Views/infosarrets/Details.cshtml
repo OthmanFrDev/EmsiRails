@@ -1,0 +1,51 @@
+﻿@model EMSIRails.Models.infosarret
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>infosarret</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.heureArrive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.heureArrive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.heureDepart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.heureDepart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gare.libelle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gare.libelle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.voyage.idvoyage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.voyage.idvoyage)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idarret }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

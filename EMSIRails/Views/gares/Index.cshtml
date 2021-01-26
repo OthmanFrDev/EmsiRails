@@ -1,0 +1,42 @@
+﻿@model IEnumerable<EMSIRails.Models.gare>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-hover table-responsive-lg table-hover" style="text-align:center;">
+    <thead style="background-color: #F59A2E">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.libelle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ville.nom)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.libelle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ville.nom)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.idgare }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.idgare }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.idgare })
+                </td>
+            </tr>
+        }
+
+</table>

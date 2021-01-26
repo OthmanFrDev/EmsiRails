@@ -1,0 +1,81 @@
+﻿@model EMSIRails.Models.voyage
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>voyage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dateDepart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateDepart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateArrive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateArrive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HeureDepart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HeureDepart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.heureArrive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.heureArrive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gare.libelle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gare.libelle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gare1.libelle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gare1.libelle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.train.libelle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.train.libelle)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

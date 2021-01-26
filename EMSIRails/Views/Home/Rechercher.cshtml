@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Rechercher";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        @if (ViewBag.listeva != null)
+        {
+            foreach (var item in ViewBag.listeva)
+            {
+                <div class="col-lg-4 col-md-4 col-sm-4" style="text-align:center;">
+                    <div class="card">
+                        <div class="image">
+                            <img src="~/Content/img/train.jpg" style="width:320px;height:150px;" />
+                        </div>
+                        <div class="card-inner">
+                            <h1>Train Direct</h1>
+                            <div class="header">
+                                <h5><i class="fas fa-train m-2" style="color:#F59A2E"></i>Train nᵒ @item.idtrain</h5>
+                                <h5><i class="fas fa-map-pin m-2" style="color:#F59A2E"></i> @item.villeDepart <i class="fas fa-long-arrow-alt-right m-2" style="color:#F59A2E"></i> @item.villeArrive</h5>
+                                <h5><i class="fas fa-clock m-2" style="color:#F59A2E"></i> @item.heureDepart - @item.heureArrive</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        @if (ViewBag.voyageSimple != null)
+        {
+            foreach (var item in ViewBag.voyageSimple)
+            {
+                <div class="col-lg-4 col-md-4 col-sm-4" style="text-align:center;">
+                    <div class="card">
+                        <div class="image">
+                            <img src="~/Content/img/train.jpg" style="width:320px;height:150px;" />
+                        </div>
+                        <div class="card-inner">
+                            <h1>Train Direct</h1>
+                            <div class="header">
+                                <h5><i class="fas fa-train m-2" style="color:#F59A2E"></i>Train nᵒ @item.idtrain</h5>
+                                <h5><i class="fas fa-map-pin m-2" style="color:#F59A2E"></i> @item.gare1.libelle <i class="fas fa-long-arrow-alt-right m-2" style="color:#F59A2E"></i> @item.gare.libelle</h5>
+                                <h5><i class="fas fa-clock m-2" style="color:#F59A2E"></i> @item.HeureDepart - @item.heureArrive</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+        @if (ViewBag.correspandance != null)
+        {
+            foreach (var item in ViewBag.correspandance)
+            {
+                <div class="col-lg-4 col-md-4 col-sm-4" style="text-align:center;">
+                    <div class="card">
+                        <div class="image">
+                            <img src="~/Content/img/train.jpg" style="width:320px;height:150px;" />
+                        </div>
+                        <div class="card-inner">
+                            <h1>Correspondance</h1>
+                            <div class="header">
+                                <h5><i class="fas fa-train m-2" style="color:#F59A2E"></i>Train nᵒ @item.departCor.idtrain</h5>
+                                <h5><i class="fas fa-map-pin m-2" style="color:#F59A2E"></i> @item.departCor.gare1.libelle <i class="fas fa-long-arrow-alt-right m-2" style="color:#F59A2E"></i> @item.departCor.gare.libelle</h5>
+                                <h5><i class="fas fa-clock m-2" style="color:#F59A2E"></i>@item.departCor.HeureDepart - @item.departCor.heureArrive</h5>
+                            </div>
+                            <hr />
+                            <div class="content">
+                                <h5><i class="fas fa-train" style="color:#F59A2E"></i>Train nᵒ @item.ArriveCor.idtrain</h5>
+                                <h5><i class="fas fa-map-pin m-2" style="color:#F59A2E"></i> @item.ArriveCor.gare1.libelle <i class="fas fa-long-arrow-alt-right m-2" style="color:#F59A2E"></i> @item.ArriveCor.gare.libelle</h5>
+                                <h5><i class="fas fa-clock m-2" style="color:#F59A2E"></i>@item.ArriveCor.HeureDepart - @item.ArriveCor.heureArrive</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+</div>
+ 

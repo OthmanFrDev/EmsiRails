@@ -1,0 +1,54 @@
+﻿@model IEnumerable<EMSIRails.Models.infosarret>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-hover table-responsive-lg table-hover" style="text-align:center;">
+    <thead style="background-color: #F59A2E">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.heureArrive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.heureDepart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.gare.libelle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.voyage.idvoyage)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.heureArrive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.heureDepart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.gare.libelle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.voyage.idvoyage)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.idarret }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.idarret }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.idarret })
+                </td>
+            </tr>
+        }
+
+</table>

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ExpresstrainModelStoreContainer" CdmEntityContainer="ExpresstrainEntities">
+    <EntitySetMapping Name="gares">
+      <EntityTypeMapping TypeName="ExpresstrainModel.gare">
+        <MappingFragment StoreEntitySet="gare">
+          <ScalarProperty Name="idgare" ColumnName="idgare" />
+          <ScalarProperty Name="libelle" ColumnName="libelle" />
+          <ScalarProperty Name="idville" ColumnName="idville" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="infosarrets">
+      <EntityTypeMapping TypeName="ExpresstrainModel.infosarret">
+        <MappingFragment StoreEntitySet="infosarret">
+          <ScalarProperty Name="idarret" ColumnName="idarret" />
+          <ScalarProperty Name="idvoyage" ColumnName="idvoyage" />
+          <ScalarProperty Name="idgare" ColumnName="idgare" />
+          <ScalarProperty Name="heureArrive" ColumnName="heureArrive" />
+          <ScalarProperty Name="heureDepart" ColumnName="heureDepart" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="retards">
+      <EntityTypeMapping TypeName="ExpresstrainModel.retard">
+        <MappingFragment StoreEntitySet="retard">
+          <ScalarProperty Name="idretard" ColumnName="idretard" />
+          <ScalarProperty Name="duree" ColumnName="duree" />
+          <ScalarProperty Name="idvoyage" ColumnName="idvoyage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="trains">
+      <EntityTypeMapping TypeName="ExpresstrainModel.train">
+        <MappingFragment StoreEntitySet="train">
+          <ScalarProperty Name="idtrain" ColumnName="idtrain" />
+          <ScalarProperty Name="libelle" ColumnName="libelle" />
+          <ScalarProperty Name="nbplaces" ColumnName="nbplaces" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="villes">
+      <EntityTypeMapping TypeName="ExpresstrainModel.ville">
+        <MappingFragment StoreEntitySet="ville">
+          <ScalarProperty Name="idville" ColumnName="idville" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="voyages">
+      <EntityTypeMapping TypeName="ExpresstrainModel.voyage">
+        <MappingFragment StoreEntitySet="voyage">
+          <ScalarProperty Name="idvoyage" ColumnName="idvoyage" />
+          <ScalarProperty Name="GareDepart" ColumnName="GareDepart" />
+          <ScalarProperty Name="gareArrive" ColumnName="gareArrive" />
+          <ScalarProperty Name="dateDepart" ColumnName="dateDepart" />
+          <ScalarProperty Name="dateArrive" ColumnName="dateArrive" />
+          <ScalarProperty Name="HeureDepart" ColumnName="HeureDepart" />
+          <ScalarProperty Name="heureArrive" ColumnName="heureArrive" />
+          <ScalarProperty Name="idtrain" ColumnName="idtrain" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

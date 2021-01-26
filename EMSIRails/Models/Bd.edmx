@@ -1,0 +1,468 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ExpresstrainModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="gare">
+          <Key>
+            <PropertyRef Name="idgare" />
+          </Key>
+          <Property Name="idgare" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelle" Type="varchar" MaxLength="30" />
+          <Property Name="idville" Type="int" />
+        </EntityType>
+        <EntityType Name="infosarret">
+          <Key>
+            <PropertyRef Name="idarret" />
+            <PropertyRef Name="idvoyage" />
+            <PropertyRef Name="idgare" />
+          </Key>
+          <Property Name="idarret" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idvoyage" Type="int" Nullable="false" />
+          <Property Name="idgare" Type="int" Nullable="false" />
+          <Property Name="heureArrive" Type="time" Precision="7" />
+          <Property Name="heureDepart" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="retard">
+          <Key>
+            <PropertyRef Name="idretard" />
+          </Key>
+          <Property Name="idretard" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="duree" Type="int" />
+          <Property Name="idvoyage" Type="int" />
+        </EntityType>
+        <EntityType Name="train">
+          <Key>
+            <PropertyRef Name="idtrain" />
+          </Key>
+          <Property Name="idtrain" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelle" Type="varchar" MaxLength="30" />
+          <Property Name="nbplaces" Type="int" />
+        </EntityType>
+        <EntityType Name="ville">
+          <Key>
+            <PropertyRef Name="idville" />
+          </Key>
+          <Property Name="idville" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="voyage">
+          <Key>
+            <PropertyRef Name="idvoyage" />
+          </Key>
+          <Property Name="idvoyage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GareDepart" Type="int" />
+          <Property Name="gareArrive" Type="int" />
+          <Property Name="dateDepart" Type="date" />
+          <Property Name="dateArrive" Type="date" />
+          <Property Name="HeureDepart" Type="time" Precision="7" />
+          <Property Name="heureArrive" Type="time" Precision="7" />
+          <Property Name="idtrain" Type="int" />
+        </EntityType>
+        <Association Name="FK__gare__idville__398D8EEE">
+          <End Role="ville" Type="Self.ville" Multiplicity="0..1" />
+          <End Role="gare" Type="Self.gare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ville">
+              <PropertyRef Name="idville" />
+            </Principal>
+            <Dependent Role="gare">
+              <PropertyRef Name="idville" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__infosarre__idgar__4316F928">
+          <End Role="gare" Type="Self.gare" Multiplicity="1" />
+          <End Role="infosarret" Type="Self.infosarret" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gare">
+              <PropertyRef Name="idgare" />
+            </Principal>
+            <Dependent Role="infosarret">
+              <PropertyRef Name="idgare" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__infosarre__idvoy__4222D4EF">
+          <End Role="voyage" Type="Self.voyage" Multiplicity="1" />
+          <End Role="infosarret" Type="Self.infosarret" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="voyage">
+              <PropertyRef Name="idvoyage" />
+            </Principal>
+            <Dependent Role="infosarret">
+              <PropertyRef Name="idvoyage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__retard__idvoyage__4BAC3F29">
+          <End Role="voyage" Type="Self.voyage" Multiplicity="0..1" />
+          <End Role="retard" Type="Self.retard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="voyage">
+              <PropertyRef Name="idvoyage" />
+            </Principal>
+            <Dependent Role="retard">
+              <PropertyRef Name="idvoyage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_voyage_gare">
+          <End Role="gare" Type="Self.gare" Multiplicity="0..1" />
+          <End Role="voyage" Type="Self.voyage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gare">
+              <PropertyRef Name="idgare" />
+            </Principal>
+            <Dependent Role="voyage">
+              <PropertyRef Name="GareDepart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_voyage_gare1">
+          <End Role="gare" Type="Self.gare" Multiplicity="0..1" />
+          <End Role="voyage" Type="Self.voyage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gare">
+              <PropertyRef Name="idgare" />
+            </Principal>
+            <Dependent Role="voyage">
+              <PropertyRef Name="gareArrive" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_voyage_train">
+          <End Role="train" Type="Self.train" Multiplicity="0..1" />
+          <End Role="voyage" Type="Self.voyage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="train">
+              <PropertyRef Name="idtrain" />
+            </Principal>
+            <Dependent Role="voyage">
+              <PropertyRef Name="idtrain" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ExpresstrainModelStoreContainer">
+          <EntitySet Name="gare" EntityType="Self.gare" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="infosarret" EntityType="Self.infosarret" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="retard" EntityType="Self.retard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="train" EntityType="Self.train" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ville" EntityType="Self.ville" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="voyage" EntityType="Self.voyage" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__gare__idville__398D8EEE" Association="Self.FK__gare__idville__398D8EEE">
+            <End Role="ville" EntitySet="ville" />
+            <End Role="gare" EntitySet="gare" />
+          </AssociationSet>
+          <AssociationSet Name="FK__infosarre__idgar__4316F928" Association="Self.FK__infosarre__idgar__4316F928">
+            <End Role="gare" EntitySet="gare" />
+            <End Role="infosarret" EntitySet="infosarret" />
+          </AssociationSet>
+          <AssociationSet Name="FK__infosarre__idvoy__4222D4EF" Association="Self.FK__infosarre__idvoy__4222D4EF">
+            <End Role="voyage" EntitySet="voyage" />
+            <End Role="infosarret" EntitySet="infosarret" />
+          </AssociationSet>
+          <AssociationSet Name="FK__retard__idvoyage__4BAC3F29" Association="Self.FK__retard__idvoyage__4BAC3F29">
+            <End Role="voyage" EntitySet="voyage" />
+            <End Role="retard" EntitySet="retard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_voyage_gare" Association="Self.FK_voyage_gare">
+            <End Role="gare" EntitySet="gare" />
+            <End Role="voyage" EntitySet="voyage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_voyage_gare1" Association="Self.FK_voyage_gare1">
+            <End Role="gare" EntitySet="gare" />
+            <End Role="voyage" EntitySet="voyage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_voyage_train" Association="Self.FK_voyage_train">
+            <End Role="train" EntitySet="train" />
+            <End Role="voyage" EntitySet="voyage" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ExpresstrainModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="gare">
+          <Key>
+            <PropertyRef Name="idgare" />
+          </Key>
+          <Property Name="idgare" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="idville" Type="Int32" />
+          <NavigationProperty Name="ville" Relationship="Self.FK__gare__idville__398D8EEE" FromRole="gare" ToRole="ville" />
+          <NavigationProperty Name="infosarrets" Relationship="Self.FK__infosarre__idgar__4316F928" FromRole="gare" ToRole="infosarret" />
+          <NavigationProperty Name="voyages" Relationship="Self.FK_voyage_gare" FromRole="gare" ToRole="voyage" />
+          <NavigationProperty Name="voyages1" Relationship="Self.FK_voyage_gare1" FromRole="gare" ToRole="voyage" />
+        </EntityType>
+        <EntityType Name="infosarret">
+          <Key>
+            <PropertyRef Name="idarret" />
+            <PropertyRef Name="idvoyage" />
+            <PropertyRef Name="idgare" />
+          </Key>
+          <Property Name="idarret" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idvoyage" Type="Int32" Nullable="false" />
+          <Property Name="idgare" Type="Int32" Nullable="false" />
+          <Property Name="heureArrive" Type="Time" Precision="7" />
+          <Property Name="heureDepart" Type="Time" Precision="7" />
+          <NavigationProperty Name="gare" Relationship="Self.FK__infosarre__idgar__4316F928" FromRole="infosarret" ToRole="gare" />
+          <NavigationProperty Name="voyage" Relationship="Self.FK__infosarre__idvoy__4222D4EF" FromRole="infosarret" ToRole="voyage" />
+        </EntityType>
+        <EntityType Name="retard">
+          <Key>
+            <PropertyRef Name="idretard" />
+          </Key>
+          <Property Name="idretard" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="duree" Type="Int32" />
+          <Property Name="idvoyage" Type="Int32" />
+          <NavigationProperty Name="voyage" Relationship="Self.FK__retard__idvoyage__4BAC3F29" FromRole="retard" ToRole="voyage" />
+        </EntityType>
+        <EntityType Name="train">
+          <Key>
+            <PropertyRef Name="idtrain" />
+          </Key>
+          <Property Name="idtrain" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="nbplaces" Type="Int32" />
+          <NavigationProperty Name="voyages" Relationship="Self.FK_voyage_train" FromRole="train" ToRole="voyage" />
+        </EntityType>
+        <EntityType Name="ville">
+          <Key>
+            <PropertyRef Name="idville" />
+          </Key>
+          <Property Name="idville" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="gares" Relationship="Self.FK__gare__idville__398D8EEE" FromRole="ville" ToRole="gare" />
+        </EntityType>
+        <EntityType Name="voyage">
+          <Key>
+            <PropertyRef Name="idvoyage" />
+          </Key>
+          <Property Name="idvoyage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GareDepart" Type="Int32" />
+          <Property Name="gareArrive" Type="Int32" />
+          <Property Name="dateDepart" Type="DateTime" Precision="0" />
+          <Property Name="dateArrive" Type="DateTime" Precision="0" />
+          <Property Name="HeureDepart" Type="Time" Precision="7" />
+          <Property Name="heureArrive" Type="Time" Precision="7" />
+          <Property Name="idtrain" Type="Int32" />
+          <NavigationProperty Name="gare" Relationship="Self.FK_voyage_gare" FromRole="voyage" ToRole="gare" />
+          <NavigationProperty Name="gare1" Relationship="Self.FK_voyage_gare1" FromRole="voyage" ToRole="gare" />
+          <NavigationProperty Name="infosarrets" Relationship="Self.FK__infosarre__idvoy__4222D4EF" FromRole="voyage" ToRole="infosarret" />
+          <NavigationProperty Name="retards" Relationship="Self.FK__retard__idvoyage__4BAC3F29" FromRole="voyage" ToRole="retard" />
+          <NavigationProperty Name="train" Relationship="Self.FK_voyage_train" FromRole="voyage" ToRole="train" />
+        </EntityType>
+        <Association Name="FK__gare__idville__398D8EEE">
+          <End Role="ville" Type="Self.ville" Multiplicity="0..1" />
+          <End Role="gare" Type="Self.gare" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ville">
+              <PropertyRef Name="idville" />
+            </Principal>
+            <Dependent Role="gare">
+              <PropertyRef Name="idville" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__infosarre__idgar__4316F928">
+          <End Role="gare" Type="Self.gare" Multiplicity="1" />
+          <End Role="infosarret" Type="Self.infosarret" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gare">
+              <PropertyRef Name="idgare" />
+            </Principal>
+            <Dependent Role="infosarret">
+              <PropertyRef Name="idgare" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_voyage_gare">
+          <End Role="gare" Type="Self.gare" Multiplicity="0..1" />
+          <End Role="voyage" Type="Self.voyage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gare">
+              <PropertyRef Name="idgare" />
+            </Principal>
+            <Dependent Role="voyage">
+              <PropertyRef Name="GareDepart" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_voyage_gare1">
+          <End Role="gare" Type="Self.gare" Multiplicity="0..1" />
+          <End Role="voyage" Type="Self.voyage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gare">
+              <PropertyRef Name="idgare" />
+            </Principal>
+            <Dependent Role="voyage">
+              <PropertyRef Name="gareArrive" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__infosarre__idvoy__4222D4EF">
+          <End Role="voyage" Type="Self.voyage" Multiplicity="1" />
+          <End Role="infosarret" Type="Self.infosarret" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="voyage">
+              <PropertyRef Name="idvoyage" />
+            </Principal>
+            <Dependent Role="infosarret">
+              <PropertyRef Name="idvoyage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__retard__idvoyage__4BAC3F29">
+          <End Role="voyage" Type="Self.voyage" Multiplicity="0..1" />
+          <End Role="retard" Type="Self.retard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="voyage">
+              <PropertyRef Name="idvoyage" />
+            </Principal>
+            <Dependent Role="retard">
+              <PropertyRef Name="idvoyage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_voyage_train">
+          <End Role="train" Type="Self.train" Multiplicity="0..1" />
+          <End Role="voyage" Type="Self.voyage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="train">
+              <PropertyRef Name="idtrain" />
+            </Principal>
+            <Dependent Role="voyage">
+              <PropertyRef Name="idtrain" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ExpresstrainEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="gares" EntityType="Self.gare" />
+          <EntitySet Name="infosarrets" EntityType="Self.infosarret" />
+          <EntitySet Name="retards" EntityType="Self.retard" />
+          <EntitySet Name="trains" EntityType="Self.train" />
+          <EntitySet Name="villes" EntityType="Self.ville" />
+          <EntitySet Name="voyages" EntityType="Self.voyage" />
+          <AssociationSet Name="FK__gare__idville__398D8EEE" Association="Self.FK__gare__idville__398D8EEE">
+            <End Role="ville" EntitySet="villes" />
+            <End Role="gare" EntitySet="gares" />
+          </AssociationSet>
+          <AssociationSet Name="FK__infosarre__idgar__4316F928" Association="Self.FK__infosarre__idgar__4316F928">
+            <End Role="gare" EntitySet="gares" />
+            <End Role="infosarret" EntitySet="infosarrets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_voyage_gare" Association="Self.FK_voyage_gare">
+            <End Role="gare" EntitySet="gares" />
+            <End Role="voyage" EntitySet="voyages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_voyage_gare1" Association="Self.FK_voyage_gare1">
+            <End Role="gare" EntitySet="gares" />
+            <End Role="voyage" EntitySet="voyages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__infosarre__idvoy__4222D4EF" Association="Self.FK__infosarre__idvoy__4222D4EF">
+            <End Role="voyage" EntitySet="voyages" />
+            <End Role="infosarret" EntitySet="infosarrets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__retard__idvoyage__4BAC3F29" Association="Self.FK__retard__idvoyage__4BAC3F29">
+            <End Role="voyage" EntitySet="voyages" />
+            <End Role="retard" EntitySet="retards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_voyage_train" Association="Self.FK_voyage_train">
+            <End Role="train" EntitySet="trains" />
+            <End Role="voyage" EntitySet="voyages" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ExpresstrainModelStoreContainer" CdmEntityContainer="ExpresstrainEntities">
+          <EntitySetMapping Name="gares">
+            <EntityTypeMapping TypeName="ExpresstrainModel.gare">
+              <MappingFragment StoreEntitySet="gare">
+                <ScalarProperty Name="idgare" ColumnName="idgare" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+                <ScalarProperty Name="idville" ColumnName="idville" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="infosarrets">
+            <EntityTypeMapping TypeName="ExpresstrainModel.infosarret">
+              <MappingFragment StoreEntitySet="infosarret">
+                <ScalarProperty Name="idarret" ColumnName="idarret" />
+                <ScalarProperty Name="idvoyage" ColumnName="idvoyage" />
+                <ScalarProperty Name="idgare" ColumnName="idgare" />
+                <ScalarProperty Name="heureArrive" ColumnName="heureArrive" />
+                <ScalarProperty Name="heureDepart" ColumnName="heureDepart" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="retards">
+            <EntityTypeMapping TypeName="ExpresstrainModel.retard">
+              <MappingFragment StoreEntitySet="retard">
+                <ScalarProperty Name="idretard" ColumnName="idretard" />
+                <ScalarProperty Name="duree" ColumnName="duree" />
+                <ScalarProperty Name="idvoyage" ColumnName="idvoyage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trains">
+            <EntityTypeMapping TypeName="ExpresstrainModel.train">
+              <MappingFragment StoreEntitySet="train">
+                <ScalarProperty Name="idtrain" ColumnName="idtrain" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+                <ScalarProperty Name="nbplaces" ColumnName="nbplaces" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="villes">
+            <EntityTypeMapping TypeName="ExpresstrainModel.ville">
+              <MappingFragment StoreEntitySet="ville">
+                <ScalarProperty Name="idville" ColumnName="idville" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="voyages">
+            <EntityTypeMapping TypeName="ExpresstrainModel.voyage">
+              <MappingFragment StoreEntitySet="voyage">
+                <ScalarProperty Name="idvoyage" ColumnName="idvoyage" />
+                <ScalarProperty Name="GareDepart" ColumnName="GareDepart" />
+                <ScalarProperty Name="gareArrive" ColumnName="gareArrive" />
+                <ScalarProperty Name="dateDepart" ColumnName="dateDepart" />
+                <ScalarProperty Name="dateArrive" ColumnName="dateArrive" />
+                <ScalarProperty Name="HeureDepart" ColumnName="HeureDepart" />
+                <ScalarProperty Name="heureArrive" ColumnName="heureArrive" />
+                <ScalarProperty Name="idtrain" ColumnName="idtrain" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

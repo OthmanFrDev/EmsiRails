@@ -1,0 +1,72 @@
+﻿@model IEnumerable<EMSIRails.Models.voyage>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-hover table-responsive-lg table-hover" style="text-align:center;">
+    <thead style="background-color: #F59A2E">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.dateDepart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateArrive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeureDepart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.heureArrive)
+            </th>
+            <th>
+                Gare Départ
+            </th>
+            <th>
+                Gare d'arrivée
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.train.libelle)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dateDepart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dateArrive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HeureDepart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.heureArrive)
+                </td>
+                 <td>
+                    @Html.DisplayFor(modelItem => item.gare1.libelle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.gare.libelle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.train.libelle)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.idvoyage }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.idvoyage }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.idvoyage })
+                </td>
+            </tr>
+        }
+
+</table>

@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/favicon.png" rel="shortcut icon" type="image/x-icon" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+</head>
+<body style="font-family:fantasy;position:relative;padding-bottom:147px;min-height:100vh;">
+    <!-- NavBar-->
+    <nav class="navbar navbar-expand-lg" style="background-color: #fff">
+        <a class="navbar-brand" href="@Url.Action("index","Home")"><img src="~/Content/img/BookingBus (3).png" style="margin-top:0px;margin-bottom:0px;" /></a>
+        <button class="navbar-toggler" type="button" onclick="click()" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="navbar-toggler-icon fas fa-bars" style="color: #F59A2E"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav mr-auto">
+                <a class="nav-item nav-link active" href="@Url.Action("index","Home")"><i class="fas fa-home"></i>Acceuil</a>
+            </ul>
+            <!---->
+        </div>
+    </nav>
+    @RenderBody()
+    <!-- NavBar--><!-- Site footer -->
+    <footer class="navbar-fixed-bottom mb-0 " style="bottom:0;position:absolute;width:100%">
+        <div class="box">
+            <span>
+                <ul>
+                    <li><a href="#"><i class="fab fa-github" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fab fa-stack-overflow" aria-hidden="true"></i></a></li>
+                </ul>
+            </span>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-4 col-sm-4" style="text-align:center">
+                    <h5 class="color-blanc">
+                        Cartes accept&#233;es
+                    </h5>
+                    <img src="~/Content/payment.png" style="width:250px;height:50px;" />
+                </div>
+            </div>
+        </div>
+        <span id="ftext">&copy; All rights reserved (Beta version by NEMMASSI and FROUKH)</span>
+    </footer>
+    <!-- Site footer -->
+    <script src="~/Scripts/jquery-3.5.1.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js" integrity="sha512-oHBLR38hkpOtf4dW75gdfO7VhEKg2fsitvHZYHZjObc4BPKou2PGenyxA5ZJ8CCqWytBx5wpiSqwVEBy84b7tw==" crossorigin="anonymous"></script>
+</body>
+</html>
